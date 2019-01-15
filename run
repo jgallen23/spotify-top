@@ -1,0 +1,34 @@
+#!/bin/bash
+
+CMD=$1
+if [[ -z "$CMD" ]]; then
+  docker-compose up --build
+  exit 0
+fi
+
+if [[ "$CMD" == "npmi" ]]; then
+  SERVICE=$2
+  PKG=$3
+  echo "Installing $PKG inside $SERVICE"
+  docker-compose run --rm $SERVICE npm install $PKG
+  exit 0
+fi
+
+if [[ "$CMD" == "enter" ]]; then
+  SERVICE=$2
+  echo "Entering $SERVICE"
+  docker-compose exec $SERVICE sh
+  exit 0
+fi
+
+if [[ "$CMD" == "cmd" ]]; then
+  shift
+  SERVICE=$1
+  shift
+  C=$@
+  echo "Running '$C' inside $SERVICE"
+  docker-compose run --rm $SERVICE $C
+  exit 0
+fi
+
+docker-compose $@

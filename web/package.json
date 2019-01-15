@@ -1,0 +1,30 @@
+{
+  "name": "spotify-top-web",
+  "version": "0.0.1",
+  "description": "Web Interface for spotify-top",
+  "main": "index.js",
+  "engine": {},
+  "scripts": {
+    "start": "rapptor"
+  },
+  "author": "First+Third",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-firstandthird": "^4.3.0",
+    "eslint-plugin-import": "^2.8.0",
+    "tap": "^11.1.1"
+  },
+  "eslintConfig": {
+    "extends": "firstandthird"
+  },
+  "dependencies": {
+    "bell": "^9.4.0",
+    "hapi-req": "^2.3.8",
+    "hapi-strategy-loader": "^1.0.0",
+    "nunjucks": "^3.1.4",
+    "rapptor": "^7.2.0",
+    "vision": "^5.4.3",
+    "vision-nunjucks": "^3.0.0"
+  }
+}

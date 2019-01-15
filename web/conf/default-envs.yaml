@@ -1,0 +1,4 @@
+envVars:
+  spotifyClientId: '{{getEnv("SPOTIFY_CLIENT_ID")}}'
+  spotifyClientSecret: '{{getEnv("SPOTIFY_CLIENT_SECRET")}}'
+  apiHost: '{{getEnv("API_HOST")}}'

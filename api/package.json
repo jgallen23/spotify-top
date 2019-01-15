@@ -1,0 +1,26 @@
+{
+  "name": "spotify-top",
+  "version": "0.0.1",
+  "description": "Find GitHub projects that use your project",
+  "main": "index.js",
+  "engine": {},
+  "scripts": {
+    "start": "rapptor",
+    "test": "tap --cov tests/test.*.js"
+  },
+  "author": "First+Third",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-firstandthird": "^4.3.0",
+    "eslint-plugin-import": "^2.8.0",
+    "tap": "^11.1.1"
+  },
+  "eslintConfig": {
+    "extends": "firstandthird"
+  },
+  "dependencies": {
+    "rapptor": "^7.2.0",
+    "spotify-web-api-node": "^4.0.0"
+  }
+}

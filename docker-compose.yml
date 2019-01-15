@@ -1,0 +1,49 @@
+version: '3.7'
+services:
+  proxy:
+    image: traefik
+    command: --web --docker --logLevel=WARN
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+  web:
+    build: 
+      context: './web'
+      dockerfile: 'DockerfileDev'
+    volumes:
+      - './web:/home/app/src:delegated'
+      - 'webnm:/home/app/src/node_modules'
+    environment:
+      NODE_ENV: 'dev'
+      API_HOST: 'http://api:8080'
+      LOGR: 'bell,console'
+      LOGR_COLOR: 'true'
+      SPOTIFY_CLIENT_ID:
+      SPOTIFY_CLIENT_SECRET:
+    links:
+      - 'proxy:proxy'
+    labels:
+      - "traefik.frontend.rule=PathPrefix:/"
+
+  api:
+    build: 
+      context: './api'
+      dockerfile: 'DockerfileDev'
+    volumes:
+      - './api:/home/app/src:delegated'
+      - 'apinm:/home/app/src/node_modules'
+    environment:
+      NODE_ENV: 'dev'
+      PATH_PREFIX: '/api'
+      LOGR: 'bell,console'
+      LOGR_COLOR: 'true'
+    links:
+      - 'proxy:proxy'
+    labels:
+      - "traefik.frontend.rule=PathPrefix:/api"
+volumes:
+  webnm:
+  apinm:

@@ -1,0 +1,48 @@
+<html>
+  <h1> DepFinder (under construction) </h1>
+  <form method="get" action="/search">
+    <div>
+      <label>Library:</label>
+      <input type="text" name="lib" value="{{lib}}"/>
+    </div>
+    <div>
+      <label>Orgs:</label>
+      <input type="text" name="organizations" value="{{orgs}}"/>
+    </div>
+    <div>
+      <label>Users:</label>
+      <input type="text" name="users" value="{{user.login}}"/>
+    </div>
+    <div>
+      <label>Type:</label>
+      <select name="type">
+        <option {% if type == 'package' %}selected{% endif %} value="package">Package.json</option>
+        <option {% if type == 'dockerfile' %}selected{% endif %} value="dockerfile">Dockerfile</option>
+        <option {% if type == 'docker-compose' %}selected{% endif %} value="docker-compose">docker-compose.yml</option>
+      </select>
+    </div>
+    <div>
+      <input type="submit"/>
+    </div>
+  </form>
+  {% if results %}
+  <table>
+    <thead>
+      <tr>
+        <th>Repo</th>
+        <th>Path</th>
+        <th>Version</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in results %}
+      <tr>
+        <td><a href="{{r.url}}" target="_blank">{{r.name}}</a></td>
+        <td>{{r.path}}</td>
+        <td>{{r.version}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</html>

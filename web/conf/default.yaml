@@ -1,0 +1,32 @@
+server:
+  state:
+    isSecure: false
+verbose: false
+views:
+  engines:
+    njk: 'vision-nunjucks'
+  path: 'views'
+  compileMode: 'async'
+plugins:
+  hapi-route-loader:
+    _dependencies:
+      - 'hapi-strategy-loader'
+  vision:
+  bell:
+  hapi-req:
+  hapi-strategy-loader:
+    _dependencies:
+      - 'bell'
+    strategies:
+      spotify:
+        scheme: 'bell'
+        mode: false
+        options:
+          isSecure: false
+          forceHttps: false
+          provider: 'spotify'
+          scope:
+            - 'playlist-modify-private'
+          password: 'thisneedstochangethisneedstochange'
+          clientId: '{{envVars.spotifyClientId}}'
+          clientSecret: '{{envVars.spotifyClientSecret}}'
